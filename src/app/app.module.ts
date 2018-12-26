@@ -15,9 +15,6 @@ import { InputstokModule } from './inputstok/inputstok.module';
 import { DatastokModule } from './datastok/datastok.module';
 import { LaporanModule } from './laporan/laporan.module';
 
-
-import {FormsModule} from '@angular/forms';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +27,6 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule,
     LoginModule,
     DashboardModule,
     OrderModule,

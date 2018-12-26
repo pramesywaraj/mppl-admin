@@ -20,15 +20,24 @@ export class AuthService {
     return new Promise((resolve, reject) => {
         this.http.post(apiUrl+'/users/login', JSON.stringify(credentials), httpOptions)
           .subscribe(res => {
-
-            if(1) {
-              // localStorage.setItem('token', res.);
-              resolve(res);
-            }
-
+            localStorage.setItem('token', res.token);
+            resolve(res);
            }, (err) => {
             reject(err);
           });
     });
   }
+
+  logout() {
+    localStorage.removeItem('token');
+  }
+
+  checkLogin() {
+    if(localStorage.getItem('token')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
 }
