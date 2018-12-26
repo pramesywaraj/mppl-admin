@@ -1,6 +1,7 @@
 import { AuthService } from './../../services/auth.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { BookService } from '../../services/book.service';
 
 
 @Component({
@@ -10,7 +11,10 @@ import { Router } from '@angular/router';
 })
 export class DashboradComponent implements OnInit, OnDestroy {
 
-  constructor(private auth: AuthService, private router:Router) {
+  public data: any;
+
+  constructor(private auth: AuthService, private router:Router, private book: BookService) {
+
    }
 
   ngOnInit() {
@@ -19,10 +23,22 @@ export class DashboradComponent implements OnInit, OnDestroy {
     if(!this.auth.checkLogin()) {
       this.router.navigate(['login']);
     }
+    this.getBook();
   }
 
   ngOnDestroy(): void {
       document.body.className = '';
   }
+
+  getBook() {
+    this.book.getBook().then(res => {
+      this.data = res;
+      console.log('data in dashboard', this.data);
+    }, err => {
+      console.log('error', err);
+    });
+  }
+
+  
 
 }

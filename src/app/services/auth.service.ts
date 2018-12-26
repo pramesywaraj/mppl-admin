@@ -20,7 +20,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
         this.http.post(apiUrl+'/users/login', JSON.stringify(credentials), httpOptions)
           .subscribe(res => {
-            localStorage.setItem('token', res.token);
+            localStorage.setItem('token', res['token']);
             resolve(res);
            }, (err) => {
             reject(err);
@@ -39,5 +39,7 @@ export class AuthService {
       return false;
     }
   }
+
   
+
 }

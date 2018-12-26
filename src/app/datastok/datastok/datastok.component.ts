@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { BookService } from '../../services/book.service';
 
 @Component({
   selector: 'app-datastok',
@@ -9,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatastokComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router:Router) { }
+  public bukus: any;
+
+  constructor(private auth: AuthService, private router:Router, private book: BookService) { }
 
   ngOnInit() {
     window.dispatchEvent(new Event('resize'));
@@ -17,6 +20,20 @@ export class DatastokComponent implements OnInit {
     if(!this.auth.checkLogin()) {
       this.router.navigate(['login']);
     }
+    this.getBook();
+  }
+
+  getBook() {
+    this.book.getBook().then(res => {
+      this.bukus = res;
+      console.log('data in dashboard', this.bukus);
+    }, err => {
+      console.log('error', err);
+    });
+  }
+
+  goToInputBook() {
+    this.router.navigate(['inputstok']);
   }
 
   
